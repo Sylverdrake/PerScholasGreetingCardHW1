@@ -1,0 +1,130 @@
+.open-card {
+    transform: rotateY(90deg)
+}
+
+/* Adapted from card project, Why do we use #? */
+/* Why does text-align do the trick but align-items doesn't */
+#outside {
+    z-index: 1;
+    position: absolute;
+    background-color:#1c2235;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: 1s;
+    transform-origin: 0;
+}
+
+#outside-title {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24pt;
+    text-align:center
+}
+
+#inside {
+    z-index: 0;
+    position: absolute;
+    background-color: #2b3452;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#inside-title {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24pt;
+    text-align:center
+}
+
+/* Inluded what I learned below, this is not my code, used: https://codepen.io/cbanlawi/pen/xxRBeMY */
+
+/* container takes whole text and aligns it center, otherwise it will default to the left */
+.container {
+    text-align: center;
+}
+
+/* effect is classed defined as glitch, and text is made uppercase, 
+and a text shadow is added to give give it the first layer of
+colorful effects
+the animation is named glitch and lasts for 725milliseconds, 
+and is set to an infinite loop */
+.glitch {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+0.025em 0.04em 0 #fffc00;
+    animation: glitch 725ms infinite;
+}
+
+/* span is used twice, as noted below as the first child and last child.
+By using span, the author was able to create two additional layers of text
+to have the colors change and give it a weird horror vibe.
+Position is set to absolute so it can be manipulated by top and left. For some reason,
+the text would not align properly when top and left were both 0.
+I tweaked the left value until it aligned to a spot I liked. */
+.glitch span {
+    position: absolute;
+    top: 0;
+    left: 33.8%;
+}
+
+/* Once again the author uses the animation element to set up the next set up effects.
+Clip-path allows an image to be cropped, and by using the polygon feature, 
+you are essentially drawing the polygon out. Then, we are translating
+the text to the left with the transform element. Somewhat similar to what we had to do
+with the card */
+
+.glitch span:first-child {
+    animation: glitch 500ms infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    transform: translate(-0.04em, -0.03em);
+    opacity: 0.75;
+}
+
+.glitch span:last-child {
+    animation: glitch 375ms infinite;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    transform: translate(0.04em, 0.03em);
+    opacity: 0.75;
+}
+
+/* This one I struggled to understand at first, but the result is very cool.
+This is how the animation comes together. Each percentage represents a point in time,
+and at each point, the color effect animates to the next set, and it will repeat,
+thus creating the glitch effect on the final product.
+*/
+
+@keyframes glitch {
+    0% {
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+        0.025em 0.04em 0 #fffc00;
+    }
+    15% {
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+        0.025em 0.04em 0 #fffc00;
+    }
+    16% {
+    text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+        -0.05em -0.05em 0 #fffc00;
+    }
+    49% {
+    text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+        -0.05em -0.05em 0 #fffc00;
+    }
+    50% {
+    text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+        0 -0.04em 0 #fffc00;
+    }
+    99% {
+    text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+        0 -0.04em 0 #fffc00;
+    }
+    100% {
+    text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+        -0.04em -0.025em 0 #fffc00;
+    }
+}
